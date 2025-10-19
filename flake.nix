@@ -1,7 +1,10 @@
 {
   inputs = {
     nixpkgs = {
-      url = "github:git@github.com/NixOS/nixpkgs?ref=nixos-unstable";
+      url = "github:NixOS/nixpkgs?ref=nixos-unstable";
     };
+  };
+  outputs = {self, nixpkgs}: {
+    legacyPackages = nixpkgs.legacyPackages;
   };
 }
