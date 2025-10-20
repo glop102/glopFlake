@@ -8,6 +8,7 @@
   let
     forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
   in {
+    inherit nixpkgs;
     overlays = {
       default = import ./overlay.nix;
     };
@@ -20,5 +21,16 @@
         hello-static
         ;
     });
+    nixosConfigurations =
+    let
+      mkNixos = nixpkgs.lib.nixosSystem;
+    in {
+      playground = mkNixos {
+        system = "x86_64-linux";
+	modules = [
+	  ./nixos/configs/playground
+	];
+      };
+    };
   };
 }
