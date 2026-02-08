@@ -5,15 +5,17 @@
   ];
   config.disko.devices = {
     disk.main-os = {
-      device = "/dev/nvme0n1";
+      device = "/dev/vda";
       type = "disk";
       content = {
         type = "gpt";
         partitions = {
           boot = {
             name = "ESP";
+	    label = "ESP";
+	    type = "EF00";
             start = "1MiB";
-            size = "1GiB";
+            size = "1G";
             content = {
               type = "filesystem";
               format = "vfat";
@@ -22,6 +24,7 @@
           };
           rootfs = {
             name = "rootfs";
+	    label = "nixos-rootfs";
             size = "100%";
             content = {
               type = "filesystem";

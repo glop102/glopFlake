@@ -7,22 +7,43 @@
 }:
 {
   imports = [
-    #(import "${inputs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix")
+    ../../modules
+    ./disk-config.nix
+    ./kernel.nix
   ];
   config = {
-    boot.loader.grub.enable = false;
-    users.extraUsers.glop = {
-      password = "password";
-      isNormalUser = true;
-      extraGroups = [ "wheel" ];
+    nix.settings = {
+      experimental-features = [ "nix-command" "flakes" ];
     };
-    services.avahi.enable = true;
+    services.qemuGuest.enable = true;
+
     environment.systemPackages = with pkgs; [
+      chromium
+      firefox
+      vim
+      coreutils
+      git
+      curl
+      wget
     ];
 
-    #virtualisation.qemu.networkingOptions = [
-    #    "-net nic,netdev=user.0,model=virtio"
-    #    "-netdev user,id=user.0,\${QEMU_NET_OPTS:+,$QEMU_NET_OPTS},hostfwd=tcp::5353-:5353"
-    #];
+    boot.kernelParams = [ "boot.shell_on_fail" ];
+    boot.loader = {
+      systemd-boot = {
+        enable = true;
+	configurationLimit = 10;
+      };
+      efi.canTouchEfiVariables = true;
+    };
+
+    system.stateVersion = "26.05";
+
+    networking.hostName = "playground";
+    services.openssh.enable = true;
+    # Use systemd for networking
+    services.resolved.enable = true;
+    networking.useDHCP = false;
+    systemd.network.enable = true;
+
   };
 }

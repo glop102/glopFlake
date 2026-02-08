@@ -49,14 +49,15 @@
         {
           playground = mkNixos {
             system = "x86_64-linux";
+	    specialArgs = {inherit flakeInputs;};
             modules = [
               ./nixos/computers/playground
             ];
           };
           genserver = mkNixos {
             system = "x86_64-linux";
+	    specialArgs = {inherit flakeInputs;};
             modules = [
-              flakeInputs.disko.nixosModules.disko
               ./nixos/computers/genserver
             ];
           };
