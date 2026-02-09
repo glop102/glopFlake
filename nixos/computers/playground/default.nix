@@ -11,6 +11,7 @@
     ./disk-config.nix
     ./kernel.nix
     ./network.nix
+    ./desktop.nix
   ];
   config = {
     nix.settings = {
@@ -19,14 +20,17 @@
     services.qemuGuest.enable = true;
 
     environment.systemPackages = with pkgs; [
-      chromium
-      firefox
       vim
       coreutils
       git
       curl
       wget
     ];
+    programs = {
+      chromium.enable = true;
+      firefox.enable = true;
+      sway.enable = true;
+    };
 
     boot.kernelParams = [ "boot.shell_on_fail" ];
     boot.loader = {
