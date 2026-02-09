@@ -10,6 +10,7 @@
     ../../modules
     ./disk-config.nix
     ./kernel.nix
+    ./network.nix
   ];
   config = {
     nix.settings = {
