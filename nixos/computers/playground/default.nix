@@ -7,29 +7,27 @@
 }:
 {
   imports = [
-    ../../modules
     ./disk-config.nix
     ./kernel.nix
     ./network.nix
     ./desktop.nix
   ];
   config = {
+    # Allow unfree packages like steam
+    nixpkgs.config.allowUnfree = true;
+
     nix.settings = {
       experimental-features = [ "nix-command" "flakes" ];
     };
     services.qemuGuest.enable = true;
 
     environment.systemPackages = with pkgs; [
-      vim
-      coreutils
-      git
-      curl
-      wget
     ];
     programs = {
       chromium.enable = true;
       firefox.enable = true;
       sway.enable = true;
+      steam.enable = true;
     };
 
     boot.kernelParams = [ "boot.shell_on_fail" ];

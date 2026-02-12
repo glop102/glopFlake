@@ -51,6 +51,7 @@
             system = "x86_64-linux";
 	    specialArgs = {inherit flakeInputs;};
             modules = [
+	      ./nixos/modules
               ./nixos/computers/playground
             ];
           };
@@ -58,6 +59,7 @@
             system = "x86_64-linux";
 	    specialArgs = {inherit flakeInputs;};
             modules = [
+	      ./nixos/modules
               ./nixos/computers/genserver
             ];
           };
