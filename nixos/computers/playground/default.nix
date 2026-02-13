@@ -11,6 +11,7 @@
     ./kernel.nix
     ./network.nix
     ./desktop.nix
+    ./audio.nix
   ];
   config = {
     # Allow unfree packages like steam
