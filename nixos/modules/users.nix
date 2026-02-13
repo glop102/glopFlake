@@ -8,7 +8,10 @@
 {
   config = {
     nix.settings = {
-      trusted-users = [ "glop" "root" ];
+      trusted-users = [
+        "glop"
+        "root"
+      ];
     };
     users.users.glop = {
       initialPassword = "password";

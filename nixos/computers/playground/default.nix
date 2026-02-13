@@ -17,7 +17,10 @@
     nixpkgs.config.allowUnfree = true;
 
     nix.settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
     services.qemuGuest.enable = true;
 
@@ -34,7 +37,7 @@
     boot.loader = {
       systemd-boot = {
         enable = true;
-	configurationLimit = 10;
+        configurationLimit = 10;
       };
       efi.canTouchEfiVariables = true;
     };

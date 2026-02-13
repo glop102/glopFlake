@@ -11,8 +11,14 @@
   ];
   config = {
     nix.settings = {
-      trusted-users = [ "glop" "root" ];
-      experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [
+        "glop"
+        "root"
+      ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
     users.users.glop = {
       initialPassword = "password";
@@ -32,7 +38,7 @@
     boot.loader = {
       systemd-boot = {
         enable = true;
-	configurationLimit = 10;
+        configurationLimit = 10;
       };
       efi.canTouchEfiVariables = true;
     };

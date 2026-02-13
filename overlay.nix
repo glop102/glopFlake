@@ -11,7 +11,7 @@ final: prev: {
       rev = "2026.1.1";
       hash = "sha256-cBFsxbXQa2xqCwW6Gd90vupAykkHvRjeM5yjA383doQ=";
     };
-    patches = [];
+    patches = [ ];
     version = "2026.1.1";
   };
 }

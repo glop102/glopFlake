@@ -49,17 +49,17 @@
         {
           playground = mkNixos {
             system = "x86_64-linux";
-	    specialArgs = {inherit flakeInputs;};
+            specialArgs = { inherit flakeInputs; };
             modules = [
-	      ./nixos/modules
+              ./nixos/modules
               ./nixos/computers/playground
             ];
           };
           genserver = mkNixos {
             system = "x86_64-linux";
-	    specialArgs = {inherit flakeInputs;};
+            specialArgs = { inherit flakeInputs; };
             modules = [
-	      ./nixos/modules
+              ./nixos/modules
               ./nixos/computers/genserver
             ];
           };

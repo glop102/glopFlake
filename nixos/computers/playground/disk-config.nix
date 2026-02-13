@@ -12,8 +12,8 @@
         partitions = {
           boot = {
             name = "ESP";
-	    label = "ESP";
-	    type = "EF00";
+            label = "ESP";
+            type = "EF00";
             start = "1MiB";
             size = "1G";
             content = {
@@ -24,7 +24,7 @@
           };
           rootfs = {
             name = "rootfs";
-	    label = "nixos-rootfs";
+            label = "nixos-rootfs";
             size = "100%";
             content = {
               type = "filesystem";

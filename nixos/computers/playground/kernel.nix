@@ -1,8 +1,8 @@
-{lib,...}:
+{ lib, ... }:
 {
   config = {
     boot.kernelPatches = [
-    #{
+      #{
       # We need to have some things built into the kernel in order to boot as a VM guest
       # Alternativly we could have included the VIRTIO modules in the initrd too...
       #name = "virtio";
@@ -15,8 +15,8 @@
       #  VIRTIO_NET = yes;
       #  DRM_VIRTIO_GPU = yes;
       #};
-    #}
-  ];
+      #}
+    ];
     # Have the Virtio kernel modules added into the initrd
     boot.initrd.kernelModules = [
       "virtio"
