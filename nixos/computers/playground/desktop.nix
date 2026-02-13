@@ -20,9 +20,5 @@
     kdePackages.isoimagewriter # Optional: Program to write hybrid ISO files onto USB disks
     kdePackages.partitionmanager # Optional: Manage the disk devices, partitions and file systems on your computer
     # Non-KDE graphical packages
-    hardinfo2 # System information and benchmarks for Linux systems
-    vlc # Cross-platform media player and streaming server
-    wayland-utils # Wayland utilities
-    wl-clipboard # Command-line copy/paste utilities for Wayland
   ];
 }
