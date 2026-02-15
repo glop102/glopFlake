@@ -12,6 +12,7 @@
     wayland-utils # Wayland utilities
     wl-clipboard # Command-line copy/paste utilities for Wayland
     gimp
+    chromium
   ];
 
   programs.vscode = {
@@ -20,7 +21,7 @@
   };
 
   programs = {
-    chromium.enable = true;
+    chromium.enable = true; # Does not actually add chromium to the system, just changes policies?
     firefox.enable = true;
   };
 }
