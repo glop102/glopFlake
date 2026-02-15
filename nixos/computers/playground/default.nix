@@ -11,7 +11,6 @@
     ./kernel.nix
     ./network.nix
     ./desktop.nix
-    ./audio.nix
   ];
   config = {
     # Allow unfree packages like steam
@@ -26,10 +25,9 @@
     services.qemuGuest.enable = true;
 
     environment.systemPackages = with pkgs; [
+      discord
     ];
     programs = {
-      chromium.enable = true;
-      firefox.enable = true;
       sway.enable = true;
       steam.enable = true;
     };
@@ -46,11 +44,6 @@
     system.stateVersion = "26.05";
 
     networking.hostName = "playground";
-    services.openssh.enable = true;
-    # Use systemd for networking
-    services.resolved.enable = true;
-    networking.useDHCP = false;
-    systemd.network.enable = true;
 
   };
 }
