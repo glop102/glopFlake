@@ -12,30 +12,6 @@
     ./extras.nix
   ];
   config = {
-    nix.settings = {
-      trusted-users = [
-        "glop"
-        "root"
-      ];
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-    };
-    users.users.glop = {
-      initialPassword = "password";
-      isNormalUser = true;
-      extraGroups = [ "wheel" ];
-    };
-
-    boot.loader = {
-      systemd-boot = {
-        enable = true;
-        configurationLimit = 10;
-      };
-      efi.canTouchEfiVariables = true;
-    };
-
     networking.hostName = "genserver";
     services.openssh.enable = true;
     # Use systemd for networking
@@ -50,6 +26,8 @@
     #    DHCP = "yes";
     #  };
     #};
+
+    glopFlake.desktop.commonEnable = true;
 
   };
 }

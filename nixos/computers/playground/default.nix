@@ -13,37 +13,21 @@
     ./desktop.nix
   ];
   config = {
-    # Allow unfree packages like steam
-    nixpkgs.config.allowUnfree = true;
-
-    nix.settings = {
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-    };
     services.qemuGuest.enable = true;
 
     environment.systemPackages = with pkgs; [
       discord
     ];
-    programs = {
-      sway.enable = true;
-      steam.enable = true;
-    };
 
-    boot.kernelParams = [ "boot.shell_on_fail" ];
-    boot.loader = {
-      systemd-boot = {
-        enable = true;
-        configurationLimit = 10;
-      };
-      efi.canTouchEfiVariables = true;
+    programs = {
+      steam.enable = true;
     };
 
     system.stateVersion = "26.05";
 
     networking.hostName = "playground";
+
+    glopFlake.desktop.commonEnable = true;
 
   };
 }
