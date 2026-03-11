@@ -19,7 +19,7 @@ in
   };
   config = lib.mkMerge [
     (lib.mkIf cfg.desktop.commonEnable {
-      glopFlake.desktop.sway = true;
+      glopFlake.desktop.sway.enable = true;
     })
   ];
 }
