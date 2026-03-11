@@ -39,7 +39,28 @@
     "root": {
       "inputs": {
         "disko": "disko",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "simplifiedVideoLibraryRenamer": "simplifiedVideoLibraryRenamer"
+      }
+    },
+    "simplifiedVideoLibraryRenamer": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1772948198,
+        "narHash": "sha256-Bm2PGjCPq9Q6FONsNAjRkdbTg/+MLgi1+T+vOtIMR6k=",
+        "owner": "glop102",
+        "repo": "simplifiedVideoLibraryRenamer",
+        "rev": "0d88e075dbda4549290f97e234edf17c2cc1238c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "glop102",
+        "repo": "simplifiedVideoLibraryRenamer",
+        "type": "github"
       }
     }
   },

@@ -7,6 +7,10 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    simplifiedVideoLibraryRenamer = {
+      url = "github:glop102/simplifiedVideoLibraryRenamer";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     { self, nixpkgs, ... }@flakeInputs:
@@ -17,6 +21,7 @@
       inherit nixpkgs;
       overlays = {
         default = import ./overlay.nix;
+	simplifiedVideoLibraryRenamer = flakeInputs.simplifiedVideoLibraryRenamer.overlays.default;
       };
       legacyPackages = forAllSystems (
         system: nixpkgs.legacyPackages.${system}.appendOverlays (builtins.attrValues self.overlays)

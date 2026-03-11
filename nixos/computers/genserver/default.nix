@@ -8,6 +8,8 @@
 {
   imports = [
     ./disk-config.nix
+    ./desktop.nix
+    ./extras.nix
   ];
   config = {
     nix.settings = {
@@ -25,15 +27,6 @@
       isNormalUser = true;
       extraGroups = [ "wheel" ];
     };
-    environment.systemPackages = with pkgs; [
-      chromium
-      firefox
-      vim
-      coreutils
-      git
-      curl
-      wget
-    ];
 
     boot.loader = {
       systemd-boot = {
