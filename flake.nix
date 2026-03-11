@@ -56,6 +56,7 @@
             system = "x86_64-linux";
             specialArgs = { inherit flakeInputs; };
             modules = [
+	      {nixpkgs.overlays = (builtins.attrValues self.overlays);}
               ./nixos/modules
               ./nixos/computers/playground
             ];
@@ -64,6 +65,7 @@
             system = "x86_64-linux";
             specialArgs = { inherit flakeInputs; };
             modules = [
+	      {nixpkgs.overlays = (builtins.attrValues self.overlays);}
               ./nixos/modules
               ./nixos/computers/genserver
             ];
