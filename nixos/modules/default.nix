@@ -1,4 +1,11 @@
-{lib, config}:
+{
+  lib,
+  config,
+  ...
+}:
+let
+  cfg = config.glopFlake;
+in
 {
   imports = [
     ./users.nix
@@ -10,9 +17,6 @@
   options = {
     glopFlake.desktop.commonEnable = lib.mkEnableOption "Enable the common core desktop configs for the glopFlake";
   };
-  let
-    cfg = config.glopFlake;
-  in
   config = lib.mkMerge [
     (lib.mkIf cfg.desktop.commonEnable {
       glopFlake.desktop.sway = true;
