@@ -8,18 +8,23 @@ let
 in
 {
   imports = [
-    ./users.nix
-    ./common_utils.nix
-    ./audio.nix
     ./core_nixos_config.nix
+    ./desktop/audio.nix
+    ./desktop/common_utils.nix
     ./desktop/sway.nix
+    ./desktop/users.nix
   ];
   options = {
     glopFlake.desktop.commonEnable = lib.mkEnableOption "Enable the common core desktop configs for the glopFlake";
   };
   config = lib.mkMerge [
     (lib.mkIf cfg.desktop.commonEnable {
-      glopFlake.desktop.sway.enable = true;
+      glopFlake.desktop = {
+        commonPrograms = true;
+        audio.enable = true;
+        sway.enable = true;
+        users.enable = true;
+      };
     })
   ];
 }
