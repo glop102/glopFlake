@@ -21,7 +21,7 @@
       inherit nixpkgs;
       overlays = {
         default = import ./overlay.nix;
-	simplifiedVideoLibraryRenamer = flakeInputs.simplifiedVideoLibraryRenamer.overlays.default;
+        simplifiedVideoLibraryRenamer = flakeInputs.simplifiedVideoLibraryRenamer.overlays.default;
       };
       legacyPackages = forAllSystems (
         system: nixpkgs.legacyPackages.${system}.appendOverlays (builtins.attrValues self.overlays)
@@ -56,7 +56,7 @@
             system = "x86_64-linux";
             specialArgs = { inherit flakeInputs; };
             modules = [
-	      {nixpkgs.overlays = (builtins.attrValues self.overlays);}
+              { nixpkgs.overlays = (builtins.attrValues self.overlays); }
               ./nixos/modules
               ./nixos/computers/playground
             ];
@@ -65,7 +65,7 @@
             system = "x86_64-linux";
             specialArgs = { inherit flakeInputs; };
             modules = [
-	      {nixpkgs.overlays = (builtins.attrValues self.overlays);}
+              { nixpkgs.overlays = (builtins.attrValues self.overlays); }
               ./nixos/modules
               ./nixos/computers/genserver
             ];
