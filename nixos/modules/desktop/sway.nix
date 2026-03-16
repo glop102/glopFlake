@@ -13,6 +13,9 @@
       enable = true;
     };
     # TODO - make this do replaceVars and have some sort of prefered terminal and stuff from the flake
-    environment.etc."sway/config".source = ./sway.config;
+    environment.etc."sway/config".source = pkgs.replaceVars ./sway.config
+    (with pkgs; {
+      inherit wl-clipboard grim slurp swaynotificationcenter xfce4-terminal wmenu sway;
+    });
   };
 }
