@@ -12,5 +12,7 @@
     programs.sway = {
       enable = true;
     };
+    # TODO - make this do replaceVars and have some sort of prefered terminal and stuff from the flake
+    environment.etc."sway/config".source = ./sway.config;
   };
 }
