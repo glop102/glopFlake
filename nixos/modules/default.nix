@@ -11,6 +11,7 @@ in
     ./core_nixos_config.nix
     ./desktop/audio.nix
     ./desktop/common_utils.nix
+    ./desktop/core.nix
     ./desktop/sway.nix
     ./desktop/users.nix
   ];
@@ -20,6 +21,7 @@ in
   config = lib.mkMerge [
     (lib.mkIf cfg.desktop.commonEnable {
       glopFlake.desktop = {
+        core.enable = true;
         commonPrograms = true;
         audio.enable = true;
         sway.enable = true;
