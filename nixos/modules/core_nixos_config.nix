@@ -18,5 +18,8 @@
       };
       efi.canTouchEfiVariables = true;
     };
+
+    # This is essentially required for any major hardware like GPUs
+    hardware.enableRedistributableFirmware = true;
   };
 }
