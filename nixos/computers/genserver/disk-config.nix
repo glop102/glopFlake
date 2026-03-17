@@ -34,6 +34,40 @@
         };
       };
     };
+
+    # The local ZFS Array should get auto-imported
     boot.zfs.extraPools = [ "RAID" ];
+
+    # Also we should mount the NFS shares from TerminalDogma
+    boot.supportedFilesystems = [ "nfs" ];
+    services.rpcbind.enable = true; # needed for NFS
+    systemd.mounts = map 
+    (td_share: {
+      type = "nfs";
+      mountConfig = {
+        Options = "noatime,nfsvers=4,nosuid,_netdev";
+      };
+      what = "192.168.1.2:/mnt/ZFS2/${td_share}";
+      where = "/media/TerminalDogma/${td_share}";
+    }) [
+      "Video"
+      "Executables"
+      "Documents"
+      "Dumping\\040Ground"
+    ];
+
+    systemd.automounts = map 
+    (td_share: {
+      wantedBy = [ "multi-user.target" ];
+      automountConfig = {
+        TimeoutIdleSec = "600";
+      };
+      where = "/media/TerminalDogma/${td_share}";
+    }) [
+      "Video"
+      "Executables"
+      "Documents"
+      "Dumping\\040Ground"
+    ];
   };
 }
