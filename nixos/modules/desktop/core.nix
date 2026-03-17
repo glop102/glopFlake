@@ -11,7 +11,7 @@
   config = lib.mkIf config.glopFlake.desktop.core.enable {
     security.polkit.enable = true;
     services.gnome.gnome-keyring.enable = true;
-    
+
     # Even though the gnome keyring is running, we want it to auto-unlock when the login manager starts a session
     #security.pam.services = {
     #  greetd.enableGnomeKeyring = true;
