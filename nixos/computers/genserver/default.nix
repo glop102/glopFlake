@@ -14,6 +14,7 @@
   ];
   config = {
     networking.hostName = "genserver";
+    networking.hostId = "7c1826b0";
 
     system.stateVersion = "26.05";
 

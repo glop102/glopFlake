@@ -1,9 +1,17 @@
-{ flakeInputs, ... }:
+{ 
+  config,
+  lib,
+  pkgs,
+  flakeInputs,
+  ...
+}:
 {
   imports = [
     flakeInputs.disko.nixosModules.disko
   ];
   config = {
+    boot.supportedFilesystems = [ "nfs" "zfs" ];
+
     disko.devices = {
       disk.main-os = {
         device = "/dev/nvme0n1";
@@ -39,9 +47,13 @@
 
     # The local ZFS Array should get auto-imported
     boot.zfs.extraPools = [ "RAID" ];
+    boot.kernelModules = [ "zfs" ];
+    boot.initrd.kernelModules = [ "zfs" ];
+    boot.extraModulePackages = [
+      config.boot.kernelPackages.${pkgs.zfs.kernelModuleAttribute}
+    ];
 
     # Also we should mount the NFS shares from TerminalDogma
-    boot.supportedFilesystems = [ "nfs" ];
     services.rpcbind.enable = true; # needed for NFS
     systemd.mounts =
       map
