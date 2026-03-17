@@ -12,7 +12,8 @@
           type = "gpt";
           partitions = {
             boot = {
-              name = "ESP";
+              name = "boot";
+              label = "boot";
               start = "1MiB";
               size = "1GiB";
               content = {
@@ -23,6 +24,7 @@
             };
             rootfs = {
               name = "rootfs";
+              label = "rootfs";
               size = "100%";
               content = {
                 type = "filesystem";

@@ -19,6 +19,8 @@
     networking.useDHCP = false;
     systemd.network.enable = true;
 
+    system.stateVersion = "26.05";
+
     #systemd.network.networks."40-e" = {
     #  matchConfig.Name = "e*";  # enp9s0 (10G) or enp8s0 (1G)
     #  networkConfig = {
