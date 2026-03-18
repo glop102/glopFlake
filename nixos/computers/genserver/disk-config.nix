@@ -64,12 +64,13 @@
           };
           what = "192.168.1.2:/mnt/ZFS2/${td_share}";
           where = "/media/TerminalDogma/${td_share}";
+          wantedBy = [ "multi-user.target" ];
         })
         [
           "Video"
           "Executables"
           "Documents"
-          "Dumping\\040Ground"
+          "Dumping Ground"
         ]
       ++ [
         {
@@ -79,6 +80,7 @@
           };
           what = "/dev/disk/by-label/fast";
           where = "/media/fast";
+          wantedBy = [ "multi-user.target" ];
         }
       ];
 
@@ -95,7 +97,7 @@
           "Video"
           "Executables"
           "Documents"
-          "Dumping\\040Ground"
+          "Dumping Ground"
         ]
       ++ [
         {
