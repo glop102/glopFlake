@@ -32,5 +32,11 @@
     xdg.portal.wlr.enable = true;
     # Also something about workarounds for apps trying to open data in other programs
     xdg.portal.xdgOpenUsePortal = true;
+
+    # We need some sort of display manager+greeter to log in with and mainly to stup variables and stuff for the window manager
+    services.greetd = {
+      enable = true;
+    };
+    programs.regreet.enable = true;
   };
 }
