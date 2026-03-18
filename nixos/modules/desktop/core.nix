@@ -9,6 +9,9 @@
     core.enable = lib.mkEnableOption "Enable the glopFlake core desktop style configs";
   };
   config = lib.mkIf config.glopFlake.desktop.core.enable {
+    # Too many random little things need to punch through and i am always behind a dedicated firewall appliance at home
+    networking.firewall.enable = false;
+
     security.polkit.enable = true;
     services.gnome.gnome-keyring.enable = true;
 

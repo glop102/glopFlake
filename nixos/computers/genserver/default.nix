@@ -19,6 +19,7 @@
     system.stateVersion = "26.05";
 
     glopFlake.desktop.commonEnable = true;
+    glopFlake.desktop.games.enable = true;
 
   };
 }

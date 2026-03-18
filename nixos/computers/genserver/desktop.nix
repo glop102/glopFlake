@@ -13,5 +13,5 @@
     enable32Bit = true;
   };
   # Allow the gpu module to be added to the initrd for earlier init
-  boot.initrd.kernelModules = ["amdgpu"];
+  boot.initrd.kernelModules = [ "amdgpu" ];
 }
