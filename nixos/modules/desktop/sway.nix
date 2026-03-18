@@ -11,6 +11,10 @@
   config = lib.mkIf config.glopFlake.desktop.sway.enable {
     programs.sway = {
       enable = true;
+      extraPackages = with pkgs; [
+        adwaita-icon-theme # mouse cursor and icons
+        gnome-themes-extra # dark adwaita theme
+      ];
     };
     # TODO - make this have some sort of prefered terminal and stuff from the flake
     environment.etc."sway/config".source = pkgs.replaceVars ./sway.config (
