@@ -70,7 +70,17 @@
           "Executables"
           "Documents"
           "Dumping\\040Ground"
-        ];
+        ]
+      ++ [
+        {
+          type = "f2fs";
+          mountConfig = {
+            Options = "noatime";
+          };
+          what = "/dev/disk/by-label/fast";
+          where = "/media/fast";
+        }
+      ];
 
     systemd.automounts =
       map
@@ -86,6 +96,15 @@
           "Executables"
           "Documents"
           "Dumping\\040Ground"
-        ];
+        ]
+      ++ [
+        {
+          wantedBy = [ "multi-user.target" ];
+          automountConfig = {
+            TimeoutIdleSec = "600";
+          };
+          where = "/media/fast";
+        }
+      ];
   };
 }
