@@ -9,6 +9,7 @@ in
 {
   imports = [
     ./core_nixos_config.nix
+    ./ssh.nix
     ./desktop/audio.nix
     ./desktop/common_utils.nix
     ./desktop/core.nix
@@ -21,6 +22,8 @@ in
   };
   config = lib.mkMerge [
     (lib.mkIf cfg.desktop.commonEnable {
+      glopFlake.ssh.enable = true;
+
       glopFlake.desktop = {
         core.enable = true;
         commonPrograms = true;
