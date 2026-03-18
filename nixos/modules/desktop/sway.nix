@@ -12,7 +12,7 @@
     programs.sway = {
       enable = true;
     };
-    # TODO - make this do replaceVars and have some sort of prefered terminal and stuff from the flake
+    # TODO - make this have some sort of prefered terminal and stuff from the flake
     environment.etc."sway/config".source = pkgs.replaceVars ./sway.config (
       with pkgs;
       {
@@ -27,5 +27,10 @@
           ;
       }
     );
+
+    # Turn on the xdg portal support for things like screenshots
+    xdg.portal.wlr.enable = true;
+    # Also something about workarounds for apps trying to open data in other programs
+    xdg.portal.xdgOpenUsePortal = true;
   };
 }

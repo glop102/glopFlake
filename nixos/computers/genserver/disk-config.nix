@@ -1,4 +1,4 @@
-{ 
+{
   config,
   lib,
   pkgs,
@@ -10,7 +10,10 @@
     flakeInputs.disko.nixosModules.disko
   ];
   config = {
-    boot.supportedFilesystems = [ "nfs" "zfs" ];
+    boot.supportedFilesystems = [
+      "nfs"
+      "zfs"
+    ];
 
     disko.devices = {
       disk.main-os = {
