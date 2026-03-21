@@ -26,6 +26,9 @@
       mpv
       gimp
       chromium
+      eog
+      evince
+      libreoffice
     ];
 
     programs.vscode = {
