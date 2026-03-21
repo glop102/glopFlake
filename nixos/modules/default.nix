@@ -14,6 +14,7 @@ in
     ./desktop/common_utils.nix
     ./desktop/core.nix
     ./desktop/games.nix
+    ./desktop/greeter.nix
     ./desktop/sway.nix
     ./desktop/users.nix
   ];
@@ -29,6 +30,7 @@ in
         audio.enable = true;
         sway.enable = true;
         users.enable = true;
+        greeter.enable = true;
       };
     })
   ];
