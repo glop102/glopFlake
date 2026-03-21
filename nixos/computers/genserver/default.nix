@@ -21,5 +21,7 @@
     glopFlake.desktop.commonEnable = true;
     glopFlake.desktop.games.enable = true;
 
+    time.timeZone = "America/New_York";
+
   };
 }
