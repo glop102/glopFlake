@@ -29,6 +29,10 @@
       eog
       evince
       libreoffice
+
+
+      # Some random other things
+      claude-code
     ];
 
     programs.vscode = {
