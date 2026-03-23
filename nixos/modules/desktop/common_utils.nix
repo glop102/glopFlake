@@ -37,7 +37,17 @@
 
     programs.vscode = {
       enable = true;
-      extensions = [ ];
+      extensions = with pkgs.vscode-extensions; [
+        # Python things
+        ms-python.python #unclear what this encompasses
+        ms-python.debugpy # debugger
+        ms-python.pylint # linting
+        ms-python.vscode-pylance # LSP
+        ms-python.mypy-type-checker
+
+        # Nix things
+        bbenoist.nix
+      ];
     };
 
     programs = {

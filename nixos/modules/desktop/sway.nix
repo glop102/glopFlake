@@ -29,6 +29,7 @@
           wmenu
           sway
           ;
+        lxqt-policykit = lxqt.lxqt-policykit;
       }
     );
 
@@ -36,6 +37,12 @@
     xdg.portal.wlr.enable = true;
     # Also something about workarounds for apps trying to open data in other programs
     xdg.portal.xdgOpenUsePortal = true;
+
+    environment.systemPackages = with pkgs; [
+      lxqt.lxqt-policykit
+    ];
+
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   };
 }
