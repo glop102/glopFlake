@@ -14,4 +14,6 @@ final: prev: {
     patches = [ ];
     version = "2026.1.1";
   };
+
+  sway_bar_status = final.callPackage (import ./pkgs/sway_bar_status) { };
 }
