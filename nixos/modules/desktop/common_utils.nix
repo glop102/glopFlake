@@ -30,7 +30,6 @@
       evince
       libreoffice
 
-
       # Some random other things
       claude-code
     ];
@@ -39,7 +38,7 @@
       enable = true;
       extensions = with pkgs.vscode-extensions; [
         # Python things
-        ms-python.python #unclear what this encompasses
+        ms-python.python # unclear what this encompasses
         ms-python.debugpy # debugger
         ms-python.vscode-pylance # LSP
         ms-python.mypy-type-checker
