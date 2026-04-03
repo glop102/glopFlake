@@ -9,5 +9,9 @@
   config = lib.mkIf config.glopFlake.random_extras {
     # Adds the locate command and preiodically updates the database
     services.locate.enable = true;
+    environment.systemPackages = with pkgs; [
+      usbutils
+      vim
+    ];
   };
 }
