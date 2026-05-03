@@ -18,6 +18,7 @@ in
     ./desktop/greeter.nix
     ./desktop/sway.nix
     ./desktop/users.nix
+    ./desktop/programing.nix
   ];
   options = {
     glopFlake.desktop.commonEnable = lib.mkEnableOption "Enable the common core desktop configs for the glopFlake";
