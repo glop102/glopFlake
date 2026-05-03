@@ -35,6 +35,7 @@ in
         sway.enable = true;
         users.enable = true;
         greeter.enable = true;
+        programmingTools = true;
       };
     })
   ];
