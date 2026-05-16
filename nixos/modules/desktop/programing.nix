@@ -11,6 +11,7 @@
   config = lib.mkIf config.glopFlake.desktop.programmingTools {
     environment.systemPackages = with pkgs; [
       claude-code
+      opencode
     ];
     programs.vscode = {
       enable = true;
