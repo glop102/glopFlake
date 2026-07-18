@@ -1,15 +1,13 @@
 {
   config,
   lib,
-  pkgs,
-  inputs,
   ...
 }:
 {
-  options.glopFlake.desktop.users = {
+  options.glopFlake.users = {
     enable = lib.mkEnableOption "Add the glopFlake default users";
   };
-  config = lib.mkIf config.glopFlake.desktop.users.enable {
+  config = lib.mkIf config.glopFlake.users.enable {
     nix.settings.trusted-users = [
       "glop102"
       "root"

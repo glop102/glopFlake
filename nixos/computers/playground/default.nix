@@ -27,7 +27,5 @@
 
     networking.hostName = "playground";
 
-    glopFlake.desktop.commonEnable = true;
-
   };
 }

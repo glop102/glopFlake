@@ -58,6 +58,7 @@
             modules = [
               { nixpkgs.overlays = (builtins.attrValues self.overlays); }
               ./nixos/modules
+              ./nixos/profiles
               ./nixos/computers/playground
             ];
           };
@@ -67,6 +68,7 @@
             modules = [
               { nixpkgs.overlays = (builtins.attrValues self.overlays); }
               ./nixos/modules
+              ./nixos/profiles
               ./nixos/computers/genserver
             ];
           };

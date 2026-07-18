@@ -18,8 +18,20 @@
 
     system.stateVersion = "26.05";
 
-    glopFlake.desktop.commonEnable = true;
-    glopFlake.desktop.games.enable = true;
+    glopFlake = {
+      fonts = true;
+      random_extras = true;
+      users.enable = true;
+      profile.programmingTools.enable = true;
+      desktop = {
+        core.enable = true;
+        commonPrograms = true;
+        audio.enable = true;
+        sway.enable = true;
+        greeter.enable = true;
+        games.enable = true;
+      };
+    };
 
     time.timeZone = "America/New_York";
 

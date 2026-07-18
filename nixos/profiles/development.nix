@@ -5,10 +5,9 @@
   ...
 }:
 {
-  options.glopFlake.desktop = {
-    programmingTools = lib.mkEnableOption "Enable the glopFlake common items for programming";
-  };
-  config = lib.mkIf config.glopFlake.desktop.programmingTools {
+  options.glopFlake.profile.programmingTools.enable =
+    lib.mkEnableOption "Enable the glopFlake common items for programming";
+  config = lib.mkIf config.glopFlake.profile.programmingTools.enable {
     environment.systemPackages = with pkgs; [
       claude-code
       opencode

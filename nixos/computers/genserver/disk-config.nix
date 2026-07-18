@@ -25,8 +25,9 @@
             boot = {
               name = "boot";
               label = "boot";
+              type = "EF00";
               start = "1MiB";
-              size = "1GiB";
+              size = "1G";
               content = {
                 type = "filesystem";
                 format = "vfat";
@@ -49,6 +50,7 @@
     };
 
     # The local ZFS Array should get auto-imported
+    boot.zfs.forceImportRoot = false;
     boot.zfs.extraPools = [ "RAID" ];
     boot.kernelModules = [ "zfs" ];
     boot.initrd.kernelModules = [ "zfs" ];
@@ -67,7 +69,6 @@
           };
           what = "192.168.1.2:/mnt/ZFS2/${td_share}";
           where = "/media/TerminalDogma/${td_share}";
-          wantedBy = [ "multi-user.target" ];
         })
         [
           "Video"
@@ -83,7 +84,6 @@
           };
           what = "/dev/disk/by-label/fast";
           where = "/media/fast";
-          wantedBy = [ "multi-user.target" ];
         }
       ];
 

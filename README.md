@@ -1,5 +1,11 @@
 # Personal Nix Flake
 
+### Formatting
+
+```sh
+nix fmt
+```
+
 ### Setting up the playground image in a VM
 
 It is nice to have a VM that I can just try out random configs in and having the ability to start from scratch to keep things clean is great to have. Without going through the nixos handbook to install nixos, I have found some random resources online showing how to use this nixos-anywhere repo to do the install. It seems to be about the easiest solution to just drop an install onto a disk that follows some disko config.

@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 {
@@ -21,11 +20,5 @@
     #  swaylock.enableGnomeKeyring = true;
     #};
 
-    environment.systemPackages = with pkgs; [
-      # Wayland utils
-      grim
-      slurp
-      wl-clipboard
-    ];
   };
 }

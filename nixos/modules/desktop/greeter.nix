@@ -29,8 +29,8 @@ in
               bindsym Mod4+shift+e exec ${pkgs.sway}/bin/swaynag \
               -t warning \
               -m "What do you want to do?" \
-              -b "Poweroff" "${pkgs.systemd}/bin/systemdctl poweroff" \
-              -b "Reboot" "${pkgs.systemd}/bin/systemdctl reboot"
+              -b "Poweroff" "${pkgs.systemd}/bin/systemctl poweroff" \
+              -b "Reboot" "${pkgs.systemd}/bin/systemctl reboot"
 
               include /etc/sway/config.d/*
             '';

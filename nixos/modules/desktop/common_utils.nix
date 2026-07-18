@@ -18,6 +18,8 @@
       wget
       hardinfo2 # System information and benchmarks for Linux systems
       wayland-utils # Wayland utilities
+      grim
+      slurp
       wl-clipboard # Command-line copy/paste utilities for Wayland
       waypipe
 
@@ -30,7 +32,6 @@
       evince
       libreoffice
     ];
-
 
     programs = {
       chromium.enable = true; # Does not actually add chromium to the system, just changes policies?
