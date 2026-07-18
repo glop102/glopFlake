@@ -5,10 +5,8 @@
   ...
 }:
 {
-  options.glopFlake.desktop.sway = {
-    enable = lib.mkEnableOption "Enable the Sway config from the glopFlake";
-  };
-  config = lib.mkIf config.glopFlake.desktop.sway.enable {
+  options.glopFlake.profile.sway.enable = lib.mkEnableOption "the glopFlake Sway profile";
+  config = lib.mkIf config.glopFlake.profile.sway.enable {
     programs.sway = {
       enable = true;
       extraPackages = with pkgs; [

@@ -8,7 +8,5 @@
     ./desktop/common_utils.nix
     ./desktop/core.nix
     ./desktop/games.nix
-    ./desktop/greeter.nix
-    ./desktop/sway.nix
   ];
 }

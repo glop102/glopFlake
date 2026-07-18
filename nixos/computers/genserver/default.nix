@@ -22,13 +22,15 @@
       fonts = true;
       random_extras = true;
       users.enable = true;
-      profile.programmingTools.enable = true;
+      profile = {
+        programmingTools.enable = true;
+        sway.enable = true;
+        regreet.enable = true;
+      };
       desktop = {
         core.enable = true;
         commonPrograms = true;
         audio.enable = true;
-        sway.enable = true;
-        greeter.enable = true;
         games.enable = true;
       };
     };
