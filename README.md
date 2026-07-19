@@ -29,10 +29,9 @@ It is nice to have a VM that I can just try out random configs in and having the
 1. Boot the VM with the iso above
   * nix run .#playground-vm -- --iso iso/iso/*.iso
   * The first run prompts for the maximum size of the persistent virtual disk
-  * In the installer image, set a password for the nixos user - the letter 'a' makes a great temporary password
-1. From the host, point nixos-anywhere at the forwarded SSH port
-  * nix run github:nix-community/nixos-anywhere -- --flake '.#playground' --target-host nixos@localhost --ssh-port 2222 --post-kexec-ssh-port 2222
-  * this will reboot the VM and eject the iso automatically
+1. From the installer shell, provision the disk and install the system
+  * sudo install-image
+1. Reboot into the installed system
 1. First boot, take care of a couple things
   * change the user password
 
@@ -40,4 +39,14 @@ Later boots do not need the installer image:
 
 ```sh
 nix run .#playground-vm
+```
+
+Alternatively, `nixos-anywhere` can provision and install the system over SSH:
+
+```sh
+nix run github:nix-community/nixos-anywhere -- \
+  --flake '.#playground' \
+  --target-host nixos@localhost \
+  --ssh-port 2222 \
+  --post-kexec-ssh-port 2222
 ```

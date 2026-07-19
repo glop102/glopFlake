@@ -2,6 +2,7 @@
   imports = [
     ./core_nixos_config.nix
     ./fonts.nix
+    ./installer.nix
     ./random_extras.nix
     ./users.nix
     ./desktop/audio.nix
