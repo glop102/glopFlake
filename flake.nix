@@ -30,6 +30,9 @@
           hello-static
           ;
       });
+      apps.x86_64-linux = import ./apps.nix {
+        pkgs = self.legacyPackages.x86_64-linux;
+      };
       formatter = forAllSystems (
         system:
         let

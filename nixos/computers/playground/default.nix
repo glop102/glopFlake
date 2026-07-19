@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}:
+{ ... }:
 {
   imports = [
     ./disk-config.nix
@@ -15,12 +9,10 @@
   config = {
     services.qemuGuest.enable = true;
 
-    environment.systemPackages = with pkgs; [
-      discord
-    ];
-
-    programs = {
-      steam.enable = true;
+    glopFlake = {
+      users.enable = true;
+      profile.games.enable = true;
+      desktop.audio.enable = true;
     };
 
     system.stateVersion = "26.05";
