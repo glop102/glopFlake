@@ -1,5 +1,18 @@
 # Personal Nix Flake
 
+### Layout
+
+- `nixos/computers/`: Per-host configuration.
+- `nixos/modules/`: Reusable NixOS modules.
+- `nixos/profiles/`: Optional groups of related configuration.
+- `pkgs/`: Local packages.
+- `overlay.nix`: Package overrides and additions.
+
+### TODO
+
+- Configure Sway idle and suspend locking.
+- Add flake checks for NixOS and Disko outputs.
+
 ### Formatting
 
 ```sh

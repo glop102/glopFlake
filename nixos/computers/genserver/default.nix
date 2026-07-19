@@ -20,10 +20,11 @@
 
     glopFlake = {
       fonts = true;
-      random_extras = true;
+      randomExtras = true;
       users.enable = true;
       profile = {
         programmingTools.enable = true;
+        games.enable = true;
         sway.enable = true;
         regreet.enable = true;
       };
@@ -31,7 +32,6 @@
         core.enable = true;
         commonPrograms = true;
         audio.enable = true;
-        games.enable = true;
       };
     };
 

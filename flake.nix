@@ -18,7 +18,6 @@
       forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
     in
     {
-      inherit nixpkgs;
       overlays = {
         default = import ./overlay.nix;
         simplifiedVideoLibraryRenamer = flakeInputs.simplifiedVideoLibraryRenamer.overlays.default;

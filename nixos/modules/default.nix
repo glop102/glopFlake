@@ -7,6 +7,5 @@
     ./desktop/audio.nix
     ./desktop/common_utils.nix
     ./desktop/core.nix
-    ./desktop/games.nix
   ];
 }
