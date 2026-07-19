@@ -1,4 +1,4 @@
-{ pkgs }:
+{ nixGL, pkgs }:
 let
   playgroundVm = pkgs.writeShellApplication {
     name = "playground-vm";
@@ -18,6 +18,8 @@ let
         --cpus COUNT      Guest CPU count (default: host CPU count)
         --ssh-port PORT   Forward localhost PORT to guest SSH (default: 2222)
         --state-dir PATH  Override the persistent VM state directory
+        --nixgl           Force the NixGL graphics wrapper
+        --no-nixgl        Disable the NixGL graphics wrapper
         -h, --help        Show this help
       EOF
       }
@@ -27,6 +29,7 @@ let
       memory="8G"
       cpus="$(nproc)"
       ssh_port="2222"
+      nixgl="auto"
       state_dir="''${XDG_STATE_HOME:-$HOME/.local/state}/glopFlake/playground"
 
       while [[ $# -gt 0 ]]; do
@@ -49,6 +52,14 @@ let
           -h | --help)
             usage
             exit 0
+            ;;
+          --nixgl)
+            nixgl="yes"
+            shift
+            ;;
+          --no-nixgl)
+            nixgl="no"
+            shift
             ;;
           *)
             printf 'Unknown option: %s\n' "$1" >&2
@@ -157,7 +168,21 @@ let
 
       printf 'VM state: %s\n' "$state_dir"
       printf 'Guest SSH: ssh -p %s glop102@localhost\n' "$ssh_port"
-      exec qemu-system-x86_64 "''${qemu_args[@]}"
+      if [[ "$nixgl" == "auto" ]]; then
+        if [[ -d /run/opengl-driver ]]; then
+          nixgl="no"
+        else
+          nixgl="yes"
+        fi
+      fi
+
+      if [[ "$nixgl" == "yes" ]]; then
+        printf 'Graphics: NixGL\n'
+        exec ${nixGL}/bin/nixGLIntel qemu-system-x86_64 "''${qemu_args[@]}"
+      else
+        printf 'Graphics: native\n'
+        exec qemu-system-x86_64 "''${qemu_args[@]}"
+      fi
     '';
   };
 in

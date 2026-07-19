@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./disk-config.nix
@@ -8,6 +8,8 @@
   ];
   config = {
     services.qemuGuest.enable = true;
+
+    environment.systemPackages = [ pkgs.vim ];
 
     glopFlake = {
       users.enable = true;

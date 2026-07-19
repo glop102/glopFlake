@@ -1,8 +1,8 @@
 { ... }:
 {
   config = {
-    systemd.network.networks."40-enp1s0" = {
-      matchConfig.Name = "enp1s0";
+    systemd.network.networks."40-ethernet" = {
+      matchConfig.Type = "ether";
       networkConfig.DHCP = "yes";
     };
     services.openssh.enable = true;

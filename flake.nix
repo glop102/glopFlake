@@ -7,6 +7,10 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     simplifiedVideoLibraryRenamer = {
       url = "github:glop102/simplifiedVideoLibraryRenamer";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +36,7 @@
       });
       apps.x86_64-linux = import ./apps.nix {
         pkgs = self.legacyPackages.x86_64-linux;
+        nixGL = flakeInputs.nixgl.packages.x86_64-linux.nixGLIntel;
       };
       formatter = forAllSystems (
         system:
