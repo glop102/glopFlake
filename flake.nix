@@ -54,6 +54,10 @@
           ];
         }
       );
+      modules = {
+        default = ./nixos/modules;
+        profiles = ./nixos/profiles;
+      };
       nixosConfigurations =
         let
           mkNixos = nixpkgs.lib.nixosSystem;
