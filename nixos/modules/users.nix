@@ -13,7 +13,7 @@
       "root"
     ];
     users.users.glop102 = {
-      initialPassword = "password";
+      initialPassword = lib.mkDefault "password";
       isNormalUser = true;
       extraGroups = [
         "wheel"
