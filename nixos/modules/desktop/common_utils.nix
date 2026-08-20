@@ -11,6 +11,7 @@
   config = lib.mkIf config.glopFlake.desktop.commonPrograms {
     environment.systemPackages = with pkgs; [
       htop
+      btop
       vim
       coreutils
       git
