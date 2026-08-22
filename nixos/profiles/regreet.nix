@@ -31,7 +31,7 @@ in
         enable = true;
         settings.default_session.command = "${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway --config ${swayConfig}";
       };
-      programs.regreet.enable = true;
+      services.displayManager.regreet.enable = true;
     }
   );
 }
