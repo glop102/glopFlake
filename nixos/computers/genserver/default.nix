@@ -25,7 +25,10 @@
       profile = {
         programmingTools.enable = true;
         games.enable = true;
-        sway.enable = true;
+        sway = {
+          enable = true;
+          idle.enable = true;
+        };
         regreet.enable = true;
       };
       desktop = {
