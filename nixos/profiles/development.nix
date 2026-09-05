@@ -11,6 +11,9 @@
     environment.systemPackages = with pkgs; [
       claude-code
       opencode
+      codex
+      git
+      git-lfs
     ];
     programs.vscode = {
       enable = true;
