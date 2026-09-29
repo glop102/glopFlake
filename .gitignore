@@ -1,7 +1,7 @@
 result
 nixos.qcow2
 **/*.swp
-
+target/
 /playground
 /genserver
 /iso
