@@ -2,7 +2,7 @@ use clap::{Parser, Subcommand, CommandFactory};
 
 #[derive(Parser)]
 #[command(name="example")]
-struct CLI {
+struct Cli {
     #[command(subcommand)]
     command: Commands,
 }
@@ -11,13 +11,14 @@ struct CLI {
 enum Commands {
     Status,
     Other,
+    #[command(hide=true)]
     Completions {
         shell: clap_complete::Shell
     },
 }
 
 fn main() {
-    match CLI::parse().command {
+    match Cli::parse().command {
         Commands::Status => {
             println!("Hello, world!");
             println!("Status Command");
@@ -27,7 +28,7 @@ fn main() {
             println!("Other Command");
         },
         Commands::Completions{shell} => {
-            clap_complete::generate(shell, &mut CLI::command(), "example", &mut std::io::stdout() );
+            clap_complete::generate(shell, &mut Cli::command(), "example", &mut std::io::stdout() );
         },
     }
 }
