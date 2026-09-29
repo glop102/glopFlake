@@ -16,4 +16,5 @@ final: prev: {
   };
 
   sway_bar_status = final.callPackage (import ./pkgs/sway_bar_status) { };
+  example_bash_completion = final.callPackage (import ./pkgs/example_bash_completion) {};
 }
