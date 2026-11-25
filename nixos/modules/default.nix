@@ -1,6 +1,7 @@
 {
   imports = [
     ./core_nixos_config.nix
+    ./digitalocean_network.nix
     ./fonts.nix
     ./installer.nix
     ./random_extras.nix

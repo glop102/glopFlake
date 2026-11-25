@@ -63,6 +63,28 @@
           mkNixos = nixpkgs.lib.nixosSystem;
         in
         {
+          # DigitalOcean droplet. Gets the shared modules but not the desktop
+          # profiles. Networking comes from droplet metadata at boot, so the
+          # same system runs on the test droplet and the production one.
+          erowiki = mkNixos {
+            system = "x86_64-linux";
+            specialArgs = { inherit flakeInputs; };
+            modules = [
+              { nixpkgs.overlays = (builtins.attrValues self.overlays); }
+              ./nixos/modules
+              ./nixos/computers/erowiki
+            ];
+          };
+          # Minimal installer that nixos-anywhere kexecs a droplet into.
+          do-kexec = mkNixos {
+            system = "x86_64-linux";
+            specialArgs = { inherit flakeInputs; };
+            modules = [
+              { nixpkgs.overlays = (builtins.attrValues self.overlays); }
+              ./nixos/modules
+              ./nixos/computers/do-kexec
+            ];
+          };
           playground = mkNixos {
             system = "x86_64-linux";
             specialArgs = { inherit flakeInputs; };
