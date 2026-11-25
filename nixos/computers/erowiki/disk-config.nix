@@ -1,6 +1,5 @@
 {
   flakeInputs,
-  lib,
   ...
 }:
 {
@@ -8,10 +7,6 @@
     flakeInputs.disko.nixosModules.disko
   ];
   config = {
-    # disko's EF02 handling and digital-ocean-config.nix both add /dev/vda,
-    # and the two lists concatenate into a duplicate that grub rejects.
-    boot.loader.grub.devices = lib.mkForce [ "/dev/vda" ];
-
     # GPT with a 1M BIOS boot partition for grub's core image, then one ext4
     # root. No separate /boot: grub reads the kernels straight off ext4.
     disko.devices.disk.main = {

@@ -15,6 +15,11 @@ in
   };
 
   config = {
+    networking.firewall.allowedTCPPorts = [
+      80
+      443
+    ];
+
     # On a droplet that does not (yet) own the DNS names, validation simply
     # fails and nginx keeps serving the self-signed placeholder certs the acme
     # module generates. That droplet registers its own ACME account, so the

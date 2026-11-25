@@ -53,14 +53,18 @@ nixos-rebuild switch --flake .#erowiki --target-host root@<droplet-ip>
 
 #### Secrets (by hand, not in the repo or the nix store)
 
-- `/var/lib/mediawiki/secrets/admin-password`: only read by `install.php` on
-  an empty database, but must exist before the first boot's `mediawiki-init`.
-- `/var/lib/mediawiki/secrets/secrets.php`: `$wgTurnstileSiteKey`,
-  `$wgTurnstileSecretKey`, `$wgUpgradeKey` and `$wgAuthenticationTokenVersion`
-  from the old `LocalSettings.php` (changing the last one logs everyone out).
-- `/var/lib/mediawiki/secret.key`: the old `$wgSecretKey` value, no newline.
+In `/var/lib/mediawiki-secrets/`:
 
-All owned by `mediawiki`, mode 0600 (the `secrets` directory is 0700).
+- `admin-password`: only read by `install.php` on an empty database, but must
+  exist before the first boot's `mediawiki-init`.
+- `secrets.php`: `$wgSecretKey`, `$wgTurnstileSiteKey`,
+  `$wgTurnstileSecretKey`, `$wgUpgradeKey` and `$wgAuthenticationTokenVersion`
+  from the old `LocalSettings.php` (changing the first or last one logs
+  everyone out).
+
+Copy them in as root. For a fresh install, put them under
+`var/lib/mediawiki-secrets/` in a directory and pass it to nixos-anywhere with
+`--extra-files`. tmpfiles makes them `root:nginx` 0640 at every boot.
 
 #### Moving the wiki over from the Docker setup
 
@@ -86,6 +90,19 @@ there. To see what it would change without changing anything:
 ```sh
 DO_NETWORK_DRY_RUN=1 do-network
 ```
+
+Firewall ports are opened by the service that listens on them (openssh opens
+22 itself, `web.nix` opens 80/443), not by the host or the network module.
+
+#### Kernel
+
+Both droplet systems use `glopFlake.virtioGuestKernel`
+(`nixos/modules/virtio_guest_kernel.nix`): upstream `defconfig` +
+`kvm_guest.config`, without nixpkgs' common config or its build-everything-as-a-
+module default, plus an explicit list of what NixOS needs. It is not in the
+binary cache, so it compiles locally after each nixpkgs bump. NixOS does not
+check kernel options for custom kernels, so a missing one only shows up at
+boot: test changes in a VM first.
 
 ### Setting up the playground image in a VM
 

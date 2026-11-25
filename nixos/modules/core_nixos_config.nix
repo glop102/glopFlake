@@ -19,9 +19,19 @@
         ];
       };
 
-      boot.kernelParams = [ "boot.shell_on_fail" ];
+      # A root shell on the console when boot fails, without a password (most
+      # hosts have no root password, and reaching the console already means
+      # physical or provider-console access). Replaces the scripted initrd's
+      # boot.shell_on_fail, which systemd ignores. Two halves:
+      #  - stage 1: the initrd drops into emergency mode on a failed root
+      #    mount or similar.
+      #  - stage 2: emergency/rescue mode runs sulogin, which refuses to open
+      #    a shell for a locked root account unless forced.
+      boot.initrd.systemd.emergencyAccess = lib.mkDefault true;
+      systemd.services.emergency.environment.SYSTEMD_SULOGIN_FORCE = "1";
+      systemd.services.rescue.environment.SYSTEMD_SULOGIN_FORCE = "1";
       # This is essentially required for any major hardware like GPUs
-      hardware.enableRedistributableFirmware = true;
+      hardware.enableRedistributableFirmware = lib.mkDefault true;
     }
     (lib.mkIf config.glopFlake.uefiSystem {
       boot.loader = {

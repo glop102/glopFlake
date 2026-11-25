@@ -6,6 +6,7 @@
 }:
 let
   wikiHost = "foxtato-softworks.${config.erowiki.domain}";
+  secretsDir = "/var/lib/mediawiki-secrets";
 in
 {
   config = {
@@ -19,7 +20,7 @@ in
       # Only read by install.php on an empty database. After the production
       # dump is imported the existing admin accounts are what count, but the
       # module requires the option and the file has to exist on first boot.
-      passwordFile = "/var/lib/mediawiki/secrets/admin-password";
+      passwordFile = "${secretsDir}/admin-password";
 
       # With createLocally the module insists the database and user are both
       # "mediawiki" (socket auth, no password). The Docker database was named
@@ -85,22 +86,33 @@ in
         require_once "${./wiki-settings.php}";
 
         # Keys that must not land in the world-readable nix store: Turnstile,
-        # $wgUpgradeKey, and the production $wgSecretKey. See the README.
-        if ( is_readable( "/var/lib/mediawiki/secrets/secrets.php" ) ) {
-          require_once "/var/lib/mediawiki/secrets/secrets.php";
+        # $wgUpgradeKey, and the production $wgSecretKey (set here, it
+        # overrides the module's generated secret.key). See the README.
+        if ( is_readable( "${secretsDir}/secrets.php" ) ) {
+          require_once "${secretsDir}/secrets.php";
         }
       '';
     };
 
-    services.phpfpm.pools.mediawiki.phpOptions = ''
-      upload_max_filesize = 20M
-      post_max_size = 21M
-      memory_limit = 256M
-      max_execution_time = 300
-    '';
+    services.phpfpm.pools.mediawiki.phpOptions = {
+      upload_max_filesize = "20M";
+      post_max_size = "21M";
+      memory_limit = "256M";
+      max_execution_time = 300;
+    };
 
+    # The secrets are copied in by hand as root (nixos-anywhere --extra-files
+    # on a fresh install, before the mediawiki user exists); these fix up
+    # ownership on every boot. Root-owned with group read, and deliberately
+    # not under /var/lib/mediawiki: tmpfiles refuses to touch a root-owned
+    # file inside a directory another user owns, and the wiki only needs to
+    # read these, not change them. The group is nginx because that is the
+    # mediawiki user's group in the module (nginx can reach the wiki through
+    # the php-fpm socket anyway, so a separate group would add nothing).
     systemd.tmpfiles.rules = [
-      "d /var/lib/mediawiki/secrets 0700 mediawiki - - -"
+      "d ${secretsDir} 0750 root nginx - -"
+      "z ${secretsDir}/admin-password 0640 root nginx - -"
+      "z ${secretsDir}/secrets.php 0640 root nginx - -"
     ];
 
     services.mysql = {

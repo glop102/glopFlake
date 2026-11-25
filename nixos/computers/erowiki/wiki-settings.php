@@ -36,7 +36,7 @@ $wgVectorShowSkinPreferences = true;
 wfLoadExtension( 'ConfirmEdit/Turnstile' );
 
 function makeFooterLink_Url( string $footerText, string $Url ) {
-	return Html::element( 'a',
+	return \MediaWiki\Html\Html::element( 'a',
 		[
 			'href' => $Url,
 			'rel' => 'noreferrer noopener',

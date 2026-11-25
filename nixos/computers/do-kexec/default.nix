@@ -60,7 +60,6 @@ in
   imports = [
     (modulesPath + "/installer/netboot/netboot.nix")
     (modulesPath + "/profiles/minimal.nix")
-    (modulesPath + "/profiles/qemu-guest.nix")
   ];
 
   config = {
@@ -69,12 +68,30 @@ in
     system.nixos.variant_id = "installer";
 
     glopFlake.digitalOceanNetwork.enable = true;
+    glopFlake.virtioGuestKernel = {
+      enable = true;
+      # The netboot root: the store is a squashfs (zstd) on a loop device with
+      # a tmpfs overlay on top. vfat is for disko formatting ESPs.
+      extraConfig = with lib.kernel; {
+        SQUASHFS = yes;
+        SQUASHFS_ZSTD = yes;
+        SQUASHFS_XATTR = yes;
+        SQUASHFS_FILE_DIRECT = yes;
+        # netboot.nix mounts the store with threads=multi, which the kernel
+        # rejects unless the decompressor is chosen at mount time.
+        SQUASHFS_CHOICE_DECOMP_BY_MOUNT = yes;
+        BLK_DEV_LOOP = yes;
+        VFAT_FS = yes;
+        FAT_DEFAULT_UTF8 = yes;
+        NLS_CODEPAGE_437 = yes;
+        NLS_ISO8859_1 = yes;
+      };
+    };
 
     # core_nixos_config defaults to systemd-boot for UEFI hosts; the netboot
     # module boots via kexec and has no bootloader at all.
     glopFlake.uefiSystem = false;
     boot.loader.grub.enable = lib.mkForce false;
-    hardware.enableRedistributableFirmware = lib.mkForce false;
 
     # Only what installing onto a virtio disk needs.
     boot.supportedFilesystems = lib.mkForce [
@@ -99,34 +116,6 @@ in
       setNixPath = false;
       setFlakeRegistry = false;
     };
-
-    # The full module tree is ~140 MiB of already-compressed .ko.xz that the
-    # squashfs cannot shrink. A droplet is a KVM guest with virtio devices, so
-    # drop whole hardware classes it can never have. aggregateModules reruns
-    # depmod over what is left.
-    system.modulesTree = lib.mkForce [
-      (pkgs.runCommand "${config.boot.kernelPackages.kernel.name}-modules-droplet" { } ''
-        cp -r --no-preserve=mode ${lib.getOutput "modules" config.boot.kernelPackages.kernel} $out
-        cd $out/lib/modules/*/kernel
-        rm -rf \
-          sound \
-          drivers/gpu drivers/media drivers/infiniband drivers/iio \
-          drivers/staging drivers/video drivers/hwmon drivers/mtd \
-          drivers/bluetooth drivers/isdn drivers/net/wireless \
-          drivers/net/ethernet drivers/net/can drivers/net/usb \
-          net/wireless net/bluetooth net/mac80211
-      '')
-    ];
-    # qemu-guest.nix loads virtio_gpu in stage 1; droplets have plain VGA, and
-    # the GPU driver tree was removed above.
-    boot.initrd.kernelModules = lib.mkForce [
-      "dm_mod"
-      "loop"
-      "overlay"
-      "virtio_balloon"
-      "virtio_console"
-      "virtio_rng"
-    ];
 
     services.openssh = {
       enable = true;
